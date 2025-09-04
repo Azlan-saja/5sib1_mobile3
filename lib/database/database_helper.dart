@@ -34,7 +34,7 @@ class DatabaseHelper {
   // Tambah Data Users
   final String insertUsersTable = '''
   INSERT INTO users (userId, userName, UserPassword)
-  VALUES (1, 'admin', '12345')
+    VALUES (1, 'admin', '12345')
   ''';
 
   // Initialize the database
