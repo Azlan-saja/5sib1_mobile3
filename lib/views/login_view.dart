@@ -58,9 +58,9 @@ class _LoginViewState extends State<LoginView> {
                     prefixIcon: Icon(Icons.key),
                     suffixIcon: InkWell(
                       onTap: () {
-                        setState(() {
-                          loginController.showHidePassword();
-                        });
+                        // setState(() {
+                        loginController.showHidePassword();
+                        // });
                       },
                       child: Icon(
                         loginController.isVisible
