@@ -88,7 +88,7 @@ class _LoginViewState extends State<LoginView> {
                     width: double.infinity,
                     child: FilledButton.icon(
                       onPressed: () {
-                        loginController.cekLogin();
+                        loginController.cekLogin(context);
                       },
                       label: Text("Login"),
                       icon: Icon(Icons.login),
