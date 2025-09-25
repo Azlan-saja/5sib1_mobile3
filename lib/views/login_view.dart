@@ -38,6 +38,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   // 3. Inputan Username,
                   TextFormField(
+                    textInputAction: TextInputAction.next,
                     validator: (value) => loginController.cekVailadasi(value),
                     controller: loginController.usernameController,
                     decoration: InputDecoration(
@@ -55,6 +56,8 @@ class _LoginViewState extends State<LoginView> {
                   // 4. Inputan Password,
                   SizedBox(height: 14),
                   TextFormField(
+                    onFieldSubmitted: (value) =>
+                        loginController.cekLogin(context),
                     validator: (value) => loginController.cekVailadasi(value),
                     controller: loginController.passwordController,
                     obscureText: loginController.isVisible,
