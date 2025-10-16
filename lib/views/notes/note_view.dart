@@ -6,14 +6,24 @@ import 'package:aplikasi_5sib1_mobile3/views/notes/update_note_view.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class NoteView extends StatelessWidget {
+class NoteView extends StatefulWidget {
   const NoteView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final noteController = NoteController();
-    noteController.init();
+  State<NoteView> createState() => _NoteViewState();
+}
 
+class _NoteViewState extends State<NoteView> {
+  final noteController = NoteController();
+
+  @override
+  void initState() {
+    super.initState();
+    noteController.init();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
@@ -96,6 +106,40 @@ class NoteView extends StatelessWidget {
                             elevation: 4,
                             shadowColor: Colors.black.withAlpha(123),
                             child: ListTile(
+                              leading: IconButton(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: Text('Hapus'),
+                                      content:
+                                          Text('Yakin ingin hapus data ini?'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          child: Text('Batal'),
+                                        ),
+                                        FilledButton(
+                                          onPressed: () async {
+                                            await noteController
+                                                .prosesDeleteData(
+                                              context,
+                                              noteId: note.noteId!,
+                                            );
+                                            setState(() {});
+                                          },
+                                          child: Text('Iya, hapus'),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                              ),
                               tileColor: Colors.teal.withAlpha(30),
                               contentPadding: const EdgeInsets.symmetric(
                                   horizontal: 16, vertical: 6),

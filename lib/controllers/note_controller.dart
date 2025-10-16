@@ -121,4 +121,49 @@ class NoteController {
       );
     }
   }
+
+  Future prosesDeleteData(BuildContext context, {required int noteId}) async {
+    Navigator.pop(context);
+
+    try {
+      int result = await handler.deleteNote(noteId);
+      if (!context.mounted) return;
+
+      if (result > 0) {
+        init();
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Note Delete successfully!'),
+            backgroundColor: Colors.teal[400],
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+
+        // Navigasi ke halaman Notes
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const NoteView()),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Failed to delete note. Please try again.'),
+            backgroundColor: Colors.redAccent,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+    } catch (e) {
+      if (!context.mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('An error occurred while delete the note.'),
+          backgroundColor: Colors.redAccent,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
+  }
 }
