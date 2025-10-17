@@ -12,6 +12,8 @@ class NoteController {
   late DatabaseHelper handler;
   late Future<List<NoteModel>> notes;
 
+  final searchController = TextEditingController();
+
   cekVailadasi(String? value) {
     if (value!.isEmpty) {
       return 'Tidak boleh kosong';
@@ -164,6 +166,16 @@ class NoteController {
           behavior: SnackBarBehavior.floating,
         ),
       );
+    }
+  }
+
+  prosesSearch() {
+    if (searchController.text.isNotEmpty) {
+      // Cari dan tampilkan filter
+      notes = handler.searchNotes(searchController.text);
+    } else {
+      // Tampilkan semua
+      init();
     }
   }
 }

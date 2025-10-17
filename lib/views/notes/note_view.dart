@@ -65,6 +65,11 @@ class _NoteViewState extends State<NoteView> {
           children: [
             // textfield pencarian
             TextFormField(
+              controller: noteController.searchController,
+              onChanged: (value) async {
+                await noteController.prosesSearch();
+                setState(() {});
+              },
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search),
                 hintText: "Cari Notes disini...",
